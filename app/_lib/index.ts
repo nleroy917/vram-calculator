@@ -1,4 +1,5 @@
-import { ModelConfig, Optimizer, Precision, ResultEstimation, RunConfig, Unit } from "@/app/_interfaces"
+import { ModelConfig, Optimizer, Precision, ResultEstimation, RunConfig, Unit, AttentionType } from "@/app/_interfaces"
+import { log } from "console"
 
 export function estimateResult({
   modelConfig,
@@ -85,7 +86,7 @@ export function estimateResult({
  * store activations across single layer.
  */
 function calculateActivations({ modelConfig, runConfig }: { modelConfig: ModelConfig; runConfig: RunConfig }): number {
-  const { hiddenSize, numAttentionHeads, numKeyValueHeads, intermediateSize, numLayers } = modelConfig
+  const { hiddenSize, numAttentionHeads, numKeyValueHeads, intermediateSize, numLayers, attentionType } = modelConfig
   const { batchSize, sequenceLength, numGPUs, isTraining, trainingPrecision, inferencePrecision, isFSDP } = runConfig
 
   // Activations take 2 bytes in case of training with mixed
@@ -96,12 +97,14 @@ function calculateActivations({ modelConfig, runConfig }: { modelConfig: ModelCo
       : 4
   const headDim = hiddenSize / numAttentionHeads
 
+  const attentionMultiplier = attentionType === AttentionType.Vanilla ? (seqLen: number) => Math.pow(seqLen, 2) : (seqLen: number) => seqLen * Math.log2(seqLen)
+
   const attentionInput = bytesPerParam * batchSize * sequenceLength * hiddenSize
   const q = bytesPerParam * batchSize * sequenceLength * headDim * numAttentionHeads
   const k = bytesPerParam * batchSize * sequenceLength * headDim * numKeyValueHeads
-  const softmaxOutput = bytesPerParam * batchSize * numAttentionHeads * Math.pow(sequenceLength, 2)
-  const softmaxDropoutMask = 1 * batchSize * numAttentionHeads * Math.pow(sequenceLength, 2)
-  const dropoutOutput = bytesPerParam * batchSize * numAttentionHeads * Math.pow(sequenceLength, 2)
+  const softmaxOutput = bytesPerParam * batchSize * numAttentionHeads * attentionMultiplier(sequenceLength)
+  const softmaxDropoutMask = 1 * batchSize * numAttentionHeads * attentionMultiplier(sequenceLength)
+  const dropoutOutput = bytesPerParam * batchSize * numAttentionHeads * attentionMultiplier(sequenceLength)
   const v = bytesPerParam * batchSize * sequenceLength * headDim * numKeyValueHeads
   const outProjInput = bytesPerParam * batchSize * sequenceLength * numAttentionHeads * headDim
   const attentionDropout = 1 * batchSize * sequenceLength * hiddenSize
