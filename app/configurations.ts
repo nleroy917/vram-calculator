@@ -11,12 +11,25 @@ export const defaultRunConfig: RunConfig = {
   numGPUs: 1,
   isFSDP: true,
   isInferenceModelParallelism: true,
+  maskRate: 0.30,
 }
 
 export const modelConfigPresets: {
   label: string
   modelConfig: ModelConfig
 }[] = [
+  {
+    label: "databio/atacformer-small",
+    modelConfig: {
+      numParams: 0.15,
+      numLayers: 6,
+      vocabSize: 100_000,
+      hiddenSize: 384,
+      intermediateSize: 1536,
+      numAttentionHeads: 8,
+      numKeyValueHeads: 8,
+    },
+  },
   {
     label: "NousResearch/Llama-2-70b-hf",
     modelConfig: {

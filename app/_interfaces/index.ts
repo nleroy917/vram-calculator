@@ -32,6 +32,7 @@ export interface RunConfig {
   numGPUs: number
   isFSDP: boolean
   isInferenceModelParallelism: boolean
+  maskRate: number
 }
 
 export interface ResultEstimation {
