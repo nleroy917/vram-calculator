@@ -1,5 +1,5 @@
 import { ModelConfig, Optimizer, Precision, ResultEstimation, RunConfig, Unit, AttentionType } from "@/app/_interfaces"
-import { log } from "console"
+
 
 export function estimateResult({
   modelConfig,
