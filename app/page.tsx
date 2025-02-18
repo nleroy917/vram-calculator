@@ -178,33 +178,17 @@ export default function App() {
                 helperText={runConfig.batchSize === 0 ? "Can't be empty!" : ""}
               />
             </Stack>
-              
-            <Stack spacing={1} direction="row" alignItems="top" justifyContent="center">
-              <TextField
-                label="Number of GPUs"
-                value={runConfig.numGPUs > 0 ? runConfig.numGPUs : ""}
-                error={runConfig.numGPUs === 0}
-                onChange={(e) =>
-                  Number(e.target.value) >= 0
-                    ? setRunConfig({ ...runConfig, numGPUs: Number(e.target.value) })
-                    : runConfig.numGPUs
-                }
-                helperText={runConfig.numGPUs === 0 ? "Can't be empty!" : ""}
-              />
-              <TextField
-                label="Mask rate"
-                value={runConfig.maskRate > 0 ? runConfig.maskRate : ""}
-                error={runConfig.maskRate === 0}
-                onChange={(e) =>
-                  Number(e.target.value) >= 0
-                    ? setRunConfig({ ...runConfig, maskRate: Number(e.target.value) })
-                    : runConfig.maskRate
-                }
-                helperText={runConfig.numGPUs === 0 ? "Can't be empty!" : ""}
-                type="number"
-              />
-            </Stack>
-
+            <TextField
+              label="Number of GPUs"
+              value={runConfig.numGPUs > 0 ? runConfig.numGPUs : ""}
+              error={runConfig.numGPUs === 0}
+              onChange={(e) =>
+                Number(e.target.value) >= 0
+                  ? setRunConfig({ ...runConfig, numGPUs: Number(e.target.value) })
+                  : runConfig.numGPUs
+              }
+              helperText={runConfig.numGPUs === 0 ? "Can't be empty!" : ""}
+            />
             {runConfig.isTraining && runConfig.numGPUs > 1 && (
               <Stack spacing={1} direction="row" alignItems="center" justifyContent="left">
                 <FormControlLabel

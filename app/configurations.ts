@@ -11,26 +11,12 @@ export const defaultRunConfig: RunConfig = {
   numGPUs: 1,
   isFSDP: true,
   isInferenceModelParallelism: true,
-  maskRate: 0.30,
 }
 
 export const modelConfigPresets: {
   label: string
   modelConfig: ModelConfig
 }[] = [
-  {
-    label: "databio/atacformer-small",
-    modelConfig: {
-      numParams: 0.15,
-      numLayers: 6,
-      vocabSize: 100_000,
-      hiddenSize: 384,
-      intermediateSize: 1536,
-      numAttentionHeads: 8,
-      numKeyValueHeads: 8,
-      attentionType: AttentionType.Vanilla,
-    },
-  },
   {
     label: "NousResearch/Llama-2-70b-hf",
     modelConfig: {
@@ -41,6 +27,7 @@ export const modelConfigPresets: {
       intermediateSize: 28672,
       numAttentionHeads: 64,
       numKeyValueHeads: 8,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -53,6 +40,7 @@ export const modelConfigPresets: {
       intermediateSize: 13824,
       numAttentionHeads: 40,
       numKeyValueHeads: 40,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -65,6 +53,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 32,
       intermediateSize: 11008,
       numLayers: 32,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -77,6 +66,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 8,
       intermediateSize: 14336,
       numLayers: 32,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -89,6 +79,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 32,
       intermediateSize: 4 * 2560,
       numLayers: 32,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -101,6 +92,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 32,
       intermediateSize: 4 * 2048,
       numLayers: 24,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -113,6 +105,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 25,
       intermediateSize: 4 * 1600,
       numLayers: 48,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -125,6 +118,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 20,
       intermediateSize: 4 * 1280,
       numLayers: 36,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -137,6 +131,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 16,
       intermediateSize: 4 * 1024,
       numLayers: 24,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {
@@ -149,6 +144,7 @@ export const modelConfigPresets: {
       numKeyValueHeads: 12,
       intermediateSize: 4 * 768,
       numLayers: 12,
+      attentionType: AttentionType.Vanilla,
     },
   },
 ]

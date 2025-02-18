@@ -26,7 +26,6 @@ export function estimateResult({
     inferencePrecision,
     isFSDP,
     isInferenceModelParallelism,
-    maskRate
   } = runConfig
 
   const bytesPerParam = isTraining
@@ -55,7 +54,7 @@ export function estimateResult({
 
   // On training storing probabilities after softmax
   // output which are the same size as output.
-  const outputs = 4 * batchSize * sequenceLength * vocabSize * (isTraining ? 2 : 1) * maskRate
+  const outputs = 4 * batchSize * sequenceLength * vocabSize * (isTraining ? 2 : 1)
 
   const gradients = (4 * numParams * 10 ** 9) / gpuDivisor
   const firstMoments = (4 * numParams * 10 ** 9) / gpuDivisor
