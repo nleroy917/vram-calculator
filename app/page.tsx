@@ -257,6 +257,7 @@ export default function App() {
                   : modelConfig.numParams
               }
               helperText={modelConfig.numParams === 0 ? "Can't be empty!" : ""}
+              type="number"
             />
 
             <Stack spacing={1} direction="row" alignItems="top" justifyContent="center">
