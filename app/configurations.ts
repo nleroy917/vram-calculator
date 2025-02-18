@@ -1,4 +1,4 @@
-import { ModelConfig, Optimizer, Precision, RunConfig } from "@/app/_interfaces"
+import { ModelConfig, Optimizer, Precision, AttentionType, RunConfig } from "@/app/_interfaces"
 
 export const defaultRunConfig: RunConfig = {
   inferencePrecision: Precision.half,
@@ -28,6 +28,7 @@ export const modelConfigPresets: {
       intermediateSize: 1536,
       numAttentionHeads: 8,
       numKeyValueHeads: 8,
+      attentionType: AttentionType.Vanilla,
     },
   },
   {

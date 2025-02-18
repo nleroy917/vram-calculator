@@ -1,7 +1,7 @@
 "use client"
 
 import StackedBarChart from "@/app/_components/StackedBarChart"
-import { Optimizer, Precision, Unit } from "@/app/_interfaces"
+import { Optimizer, Precision, Unit, AttentionType } from "@/app/_interfaces"
 import { estimateResult, getTotalUsagePerGPU } from "@/app/_lib"
 import { defaultRunConfig, modelConfigPresets } from "@/app/configurations"
 import { HelpOutline } from "@mui/icons-material"
@@ -137,6 +137,22 @@ export default function App() {
               </Stack>
             )}
 
+            <Stack spacing={1} direction="row" alignItems="center" justifyContent="left">
+                <Typography variant="body1">Attention: </Typography>
+                <Chip
+                  label="Vanilla"
+                  color="primary"
+                  variant={modelConfig.attentionType == AttentionType.Vanilla ? "filled" : "outlined"}
+                  onClick={() => setModelConfig({ ...modelConfig, attentionType: AttentionType.Vanilla })}
+                />
+                <Chip
+                  label="Flash"
+                  color="primary"
+                  variant={modelConfig.attentionType == AttentionType.Flash ? "filled" : "outlined"}
+                  onClick={() => setModelConfig({ ...modelConfig, attentionType: AttentionType.Flash })}
+                />
+              </Stack>
+
             <Stack spacing={1} direction="row" alignItems="top" justifyContent="center">
               <TextField
                 label="Sequence Length"
@@ -185,6 +201,7 @@ export default function App() {
                     : runConfig.maskRate
                 }
                 helperText={runConfig.numGPUs === 0 ? "Can't be empty!" : ""}
+                type="number"
               />
             </Stack>
 

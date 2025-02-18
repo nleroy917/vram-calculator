@@ -11,6 +11,11 @@ export enum Optimizer {
   SGD,
 }
 
+export enum AttentionType {
+  Vanilla,
+  Flash
+}
+
 export interface ModelConfig {
   numParams: number
   hiddenSize: number
@@ -19,6 +24,7 @@ export interface ModelConfig {
   numKeyValueHeads: number
   intermediateSize: number
   numLayers: number
+  attentionType?: AttentionType
 }
 
 export interface RunConfig {
