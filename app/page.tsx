@@ -26,7 +26,7 @@ export default function App() {
   const [modelConfigPreset, setModelConfigPreset] = useState(modelConfigPresets[5])
   const [modelConfig, setModelConfig] = useState(modelConfigPresets[5].modelConfig)
   const [runConfig, setRunConfig] = useState(defaultRunConfig)
-  const [resultUnit, setResultUnit] = useState<Unit>("MiB")
+  const [resultUnit, setResultUnit] = useState<Unit>("GiB")
 
   const resultEstimation = estimateResult({ modelConfig, runConfig, unit: resultUnit })
 
